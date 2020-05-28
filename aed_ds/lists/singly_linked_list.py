@@ -8,10 +8,10 @@ class SinglyLinkedList(List):
         self.head = None
         self.tail = None
         self.count = 0
-    
+
     def get_head(self):
         return self.head
-    
+
     def get_tail(self):
         return self.tail
 
@@ -27,7 +27,7 @@ class SinglyLinkedList(List):
     # Throws EmptyListException.
     def get_first(self):
         if self.count == 0:
-            raise EmptyListException() 
+            raise EmptyListException()
         else:
             return self.head.get_element()
 
@@ -35,7 +35,7 @@ class SinglyLinkedList(List):
     # Throws EmptyListException.
     def get_last(self):
         if self.count == 0:
-            raise EmptyListException() 
+            raise EmptyListException()
         else:
             return self.tail.get_element()
 
@@ -48,7 +48,7 @@ class SinglyLinkedList(List):
             current_node = self.head
             for _ in range(0, position):
                 current_node = current_node.get_next()
-            return current_node.get_element()           
+            return current_node.get_element()
 
 
     # Returns the position in the list of the
@@ -60,12 +60,12 @@ class SinglyLinkedList(List):
             current_node = self.head
             for position in range(0, self.count):
                 if current_node.get_element() == element:
-                    return position 
-                current_node = current_node.get_next()    
+                    return position
+                current_node = current_node.get_next()
             else:
                 return -1
         else:
-            return -1                   
+            return -1
 
     # Inserts the specified element at the first position in the list.
     def insert_first(self, element):
@@ -117,13 +117,13 @@ class SinglyLinkedList(List):
             self.head = self.head.get_next()
             first_node.set_next(None)
             self.count -= 1
-            return first_node.get_element()     
+            return first_node.get_element()
 
     # Removes and returns the element at the last position in the list.
     # Throws EmptyListException.
     def remove_last(self):
         if self.size() == 0:
-            raise EmptyListException()    
+            raise EmptyListException()
         if self.count != 0:
             last_node = self.tail
             current_node = self.head
@@ -158,7 +158,7 @@ class SinglyLinkedList(List):
                 return selected_node.get_element()
             else:
                 raise InvalidPositionException()
-    
+
     # Removes all elements from the list.
     def make_empty(self):
         self.head = None
@@ -168,4 +168,4 @@ class SinglyLinkedList(List):
     # Returns an iterator of the elements in the list (in proper sequence).
     def iterator(self):
         return SinglyLinkedListIterator(self)
-     
+

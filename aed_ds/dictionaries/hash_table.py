@@ -1,9 +1,9 @@
 from .tad_dictionary import Dictionary
 from ..exceptions import NoSuchElementException, DuplicatedKeyException
 from ..lists.singly_linked_list import SinglyLinkedList
-from .item import Item 
+from .item import Item
 
-import ctypes 
+import ctypes
 
 class HashTable(Dictionary):
     def __init__(self, size=101):
@@ -22,6 +22,10 @@ class HashTable(Dictionary):
         return self.num_elements == self.array_size
 
     def get(self, k): pass
+        if not has_key():
+            raise NoSuchElementException()
+        else:
+
 
     def insert(self, k, v):
         # Check if it has key
@@ -36,7 +40,7 @@ class HashTable(Dictionary):
         # Insert the item in the colision list
         self.table[idx].insert_last(item)
         # Update the number of elements
-        self.num_elements += 1    
+        self.num_elements += 1
 
     def update(self, k, v): pass
 
@@ -52,7 +56,7 @@ class HashTable(Dictionary):
         return sum([ord(c) for c in k]) % self.array_size
 
     def has_key(self, k):
-        idx = self.hash_function(k) # O(1)    
+        idx = self.hash_function(k) # O(1)
         colision_list = self.table[idx]
         it = colision_list.iterator()
         while it.has_next():

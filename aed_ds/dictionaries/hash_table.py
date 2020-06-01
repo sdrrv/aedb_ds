@@ -5,11 +5,13 @@ from .item import Item
 
 import ctypes
 
+
 class HashTable(Dictionary):
     def __init__(self, size=101):
         self.array_size = size
         self.num_elements = 0
-        self.table = (self.array_size * ctypes.py_object)() # Array of pointers
+        # Array of pointers
+        self.table = (self.array_size * ctypes.py_object)()
 
         # Create an empty list for each table position
         for i in range(self.array_size):
@@ -21,20 +23,20 @@ class HashTable(Dictionary):
     def is_full(self):
         return self.num_elements == self.array_size
 
-    def get(self, k): pass
+    def get(self, k):
         if not has_key():
             raise NoSuchElementException()
         else:
-
+            self.table[self.has_key(k)]
 
     def insert(self, k, v):
         # Check if it has key
         if self.has_key(k):
             raise DuplicatedKeyException()
 
-        ## Insert new item
+        # Insert new item
         # Calculate the table index
-        idx = self.hash_function(k) # O(1)
+        idx = self.hash_function(k)  # O(1)
         # Create a new Item
         item = Item(k, v)
         # Insert the item in the colision list
@@ -56,7 +58,7 @@ class HashTable(Dictionary):
         return sum([ord(c) for c in k]) % self.array_size
 
     def has_key(self, k):
-        idx = self.hash_function(k) # O(1)
+        idx = self.hash_function(k)  # O(1)
         colision_list = self.table[idx]
         it = colision_list.iterator()
         while it.has_next():

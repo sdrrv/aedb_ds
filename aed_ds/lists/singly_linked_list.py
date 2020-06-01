@@ -3,6 +3,7 @@ from .nodes import SingleListNode
 from ..exceptions import EmptyListException, InvalidPositionException
 from .singly_linked_list_iterator import SinglyLinkedListIterator
 
+
 class SinglyLinkedList(List):
     def __init__(self):
         self.head = None
@@ -20,6 +21,7 @@ class SinglyLinkedList(List):
         return self.count == 0
 
     # Returns the number of elements in the list.
+
     def size(self):
         return self.count
 
@@ -50,11 +52,11 @@ class SinglyLinkedList(List):
                 current_node = current_node.get_next()
             return current_node.get_element()
 
-
     # Returns the position in the list of the
     # first occurrence of the specified element,
     # or -1 if the specified element does not
     # occur in the list.
+
     def find(self, element):
         if not self.count == 0:
             current_node = self.head
@@ -100,7 +102,7 @@ class SinglyLinkedList(List):
                 self.insert_last(element)
             else:
                 current_node = self.head
-                for _ in range (0, position -1):
+                for _ in range(0, position - 1):
                     current_node = current_node.get_next()
                 new_node = SingleListNode(element, current_node.get_next())
                 current_node.set_next(new_node)
@@ -109,6 +111,7 @@ class SinglyLinkedList(List):
             self.count += 1
     # Removes and returns the element at the first position in the list.
     # Throws EmptyListException.
+
     def remove_first(self):
         if self.size() == 0:
             raise EmptyListException()
@@ -145,7 +148,7 @@ class SinglyLinkedList(List):
                 return self.remove_first()
             elif position == self.count - 1:
                 return self.remove_last()
-            elif position in range (1, self.count - 1):
+            elif position in range(1, self.count - 1):
                 selected_node = self.head
                 selected_node = selected_node.get_next()
                 current_node = self.head
@@ -168,4 +171,3 @@ class SinglyLinkedList(List):
     # Returns an iterator of the elements in the list (in proper sequence).
     def iterator(self):
         return SinglyLinkedListIterator(self)
-

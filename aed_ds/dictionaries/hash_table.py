@@ -49,11 +49,14 @@ class HashTable(Dictionary):
         return 0
 
     def remove(self, k):
-        result = SinglyLinkedList()
-        for index in self.table:
-            while index.iterator().has_next():
-                result.insert_last(index.iterator().next().get_key())
-        return result
+        if not self.has_key():
+            raise NoSuchElementException()
+        else:
+            idx = self.table[self.hash_function(k)]
+            for _ in range(self.size()):
+                node = idx.iterator().next()
+                if node.get_element().get_key() == k:
+                    node.get_element().set_value(v)
 
     def keys(self):
         result = SinglyLinkedList()

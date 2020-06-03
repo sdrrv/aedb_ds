@@ -46,9 +46,6 @@ class HashTable(Dictionary):
         self.num_elements += 1  # Update the number of elements
 
     def update(self, k, v):
-        return 0
-
-    def remove(self, k):
         if not self.has_key():
             raise NoSuchElementException()
         else:
@@ -57,6 +54,9 @@ class HashTable(Dictionary):
                 node = idx.iterator().next()
                 if node.get_element().get_key() == k:
                     node.get_element().set_value(v)
+
+    def remove(self, k):
+        return 0
 
     def keys(self):
         result = SinglyLinkedList()

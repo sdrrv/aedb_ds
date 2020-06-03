@@ -27,32 +27,54 @@ class HashTable(Dictionary):
         if not has_key():
             raise NoSuchElementException()
         else:
-            self.table[self.has_key(k)]
+            idx = self.table[self.hash_function(k)]
+            for _ in range(self.size()):
+                node = idx.iterator().next()
+                if node.get_element().get_key() == k:
+                    return node.get_element().get_value()
 
     def insert(self, k, v):
         # Check if it has key
         if self.has_key(k):
             raise DuplicatedKeyException()
-
         # Insert new item
         # Calculate the table index
         idx = self.hash_function(k)  # O(1)
-        # Create a new Item
-        item = Item(k, v)
+        item = Item(k, v)  # Create a new Item
         # Insert the item in the colision list
         self.table[idx].insert_last(item)
-        # Update the number of elements
-        self.num_elements += 1
+        self.num_elements += 1  # Update the number of elements
 
-    def update(self, k, v): pass
+    def update(self, k, v):
+        return 0
 
-    def remove(self, k): pass
+    def remove(self, k):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next().get_key())
+        return result
 
-    def keys(self): pass
+    def keys(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next().get_key())
+        return result
 
-    def values(self): pass
+    def values(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next().get_value())
+        return result
 
-    def items(self): pass
+    def items(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next())
+        return result
 
     def hash_function(self, k):
         return sum([ord(c) for c in k]) % self.array_size

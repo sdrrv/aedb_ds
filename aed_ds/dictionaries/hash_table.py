@@ -28,10 +28,10 @@ class HashTable(Dictionary):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]
-            for _ in range(self.size()):
-                node = idx.iterator().next()
-                if node.get_element().get_key() == k:
-                    return node.get_element().get_value()
+            while idx.iterator.has_next():
+                item = idx.iterator().next()
+                if item.get_element().get_key() == k:
+                    return item.get_element().get_value()
 
     def insert(self, k, v):
         # Check if it has key
@@ -50,13 +50,22 @@ class HashTable(Dictionary):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]
-            for _ in range(self.size()):
-                node = idx.iterator().next()
-                if node.get_element().get_key() == k:
-                    node.get_element().set_value(v)
+            while idx.iterator().has_next():
+                item = idx.iterator().next()
+                if item.get_element().get_key() == k:
+                    item.get_element().set_value(v)
 
     def remove(self, k):
-        return 0
+        if not self.has_key():
+            raise NoSuchElementException()
+        else:
+            idx = self.table[self.hash_function(k)]
+            list_pos = 0
+            while idx.iterator().has_next():
+                item = idx.iterator().next()
+                list_pos += 1
+                if item.get_key() == k:
+                    idx.remove(list_pos)
 
     def keys(self):
         result = SinglyLinkedList()

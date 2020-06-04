@@ -1,14 +1,33 @@
 from .tad_stack import Stack
+from ..lists.singly_linked_list import SinglyLinkedList
+from ..exceptions import FullStackException,  EmptyStackException
+
 
 class ListStack(Stack):
-    def is_empty(self): pass
+    def __init__(self):
+        self.list = SinglyLinkedList()
 
-    def is_full(self): pass
+    def is_empty(self):
+        return self.list.size() == 0
 
-    def size(self): pass
+    def is_full(self):
+        return False
 
-    def top(self): pass
+    def size(self):
+        return self.list.size()
 
-    def push(self, element): pass
+    def top(self):
+        return self.list.get_last()
 
-    def pop(self): pass
+    def push(self, element):
+        if self.is_full():
+            raise FullStackException()
+        else:
+            self.list.insert_last(element)
+
+    def pop(self):
+        if self.is_empty():
+            raise EmptyStackException()
+        else:
+            self.list.remove_last()
+

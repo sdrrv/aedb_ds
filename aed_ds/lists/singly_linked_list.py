@@ -72,19 +72,30 @@ class SinglyLinkedList(List):
     # Inserts the specified element at the first position in the list.
     def insert_first(self, element):
         new_node = SingleListNode(element, self.head)
-        self.head = new_node
         if self.count == 0:
+            self.head = new_node
             self.tail = new_node
+        elif self.count == 1:
+            new_node.set_next(self.head)
+            self.head = new_node
+        else:
+            new_node.set_next(self.head)
+            self.head = new_node
         self.count += 1
 
     # Inserts the specified element at the last position in the list.
+
     def insert_last(self, element):
         new_node = SingleListNode(element, None)
         if self.count == 0:
             self.head = new_node
             self.tail = new_node
-        self.tail.set_next(new_node)
-        self.tail = new_node
+        elif self.count == 1:
+            self.head.set_next(new_node)
+            self.tail = new_node
+        else:
+            self.tail.set_next(new_node)
+            self.tail = new_node
         self.count += 1
 
     # Inserts the specified element at the specified position in the list.

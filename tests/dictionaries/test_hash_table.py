@@ -6,7 +6,7 @@ from aed_ds.exceptions import NoSuchElementException, DuplicatedKeyException
 
 class TestHashTable(unittest.TestCase):
     def setUp(self):
-        self.table = HashTable(size=11)
+        self.table = HashTable(size=9)
 
     def insert_items(self, quantity, shift=0):
         for i in range(quantity):

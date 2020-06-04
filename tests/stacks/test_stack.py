@@ -76,4 +76,3 @@ class TestStack(ABC):
         self.pop_elements(3)
         with self.assertRaises(EmptyStackException):
             self.stack.pop()
-

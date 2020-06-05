@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from aed_ds.exceptions import FullStackException, EmptyStackException
 
 
+@unittest.SkipTest
 class TestStack(ABC):
     @abstractmethod
     def build_stack(self): pass

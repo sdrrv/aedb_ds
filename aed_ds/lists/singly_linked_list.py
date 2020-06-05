@@ -76,10 +76,8 @@ class SinglyLinkedList(List):
             self.head = new_node
             self.tail = new_node
         elif self.count == 1:
-            new_node.set_next(self.head)
             self.head = new_node
         else:
-            new_node.set_next(self.head)
             self.head = new_node
         self.count += 1
 

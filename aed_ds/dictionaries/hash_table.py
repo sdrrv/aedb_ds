@@ -21,7 +21,7 @@ class HashTable(Dictionary):
         return self.num_elements
 
     def is_full(self):
-        return self.num_elements == self.array_size
+        return self.num_elements == self.array_size()
 
     def get(self, k):
         if not has_key():

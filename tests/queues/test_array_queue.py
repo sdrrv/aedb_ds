@@ -2,7 +2,7 @@ import unittest
 
 from aed_ds.queues.array_queue import ArrayQueue
 from .test_queue import TestQueue
-
+@unittest.SkipTest
 class TestArrayQueue(unittest.TestCase, TestQueue):
     def build_queue(self):
         self.queue = ArrayQueue(self.limit)
@@ -10,3 +10,4 @@ class TestArrayQueue(unittest.TestCase, TestQueue):
     def setUp(self):
         self.limit = 10
         self.build_queue()
+

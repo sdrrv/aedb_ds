@@ -30,4 +30,3 @@ class ListStack(Stack):
             raise EmptyStackException()
         else:
             self.list.remove_last()
-

@@ -4,7 +4,6 @@ from .test_stack import TestStack
 from aed_ds.stacks.array_stack import ArrayStack
 
 
-@unittest.SkipTest
 class TestArrayStack(TestStack, unittest.TestCase):
     def build_stack(self):
         self.stack = ArrayStack(self.limit)

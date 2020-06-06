@@ -1,5 +1,7 @@
 from .tad_stack import Stack
 
+
+@unittest.SkipTest
 class ArrayStack(Stack):
     def is_empty(self): pass
 
@@ -12,3 +14,4 @@ class ArrayStack(Stack):
     def push(self, element): pass
 
     def pop(self): pass
+

@@ -21,7 +21,15 @@ class HashTable(Dictionary):
     def is_full(self):
         return self.num_elements == self.array_size
 
-    def get(self, k): pass
+    def get(self, k):
+        if not has_key():
+            raise NoSuchElementException()
+        else:
+            idx = self.table[self.hashfunction(k)]
+            for _ in range(self.size()):
+                node = idx.iterator().next()
+                if node.get_element().get_key() == k:
+                    return node.get_element().get_value()
 
     def insert(self, k, v):
         # Check if it has key
@@ -38,11 +46,25 @@ class HashTable(Dictionary):
         # Update the number of elements
         self.num_elements += 1    
 
-    def update(self, k, v): pass
+    def update(self, k, v):
+        if self.has_key(k):
+            raise NoSuchElementException()
+        idx= self.hash_function(k)
+        it = self.table[idx].iterator()
+        while it.has_next():
+            node = it.next()
+            if node.get_key()== k:
+                node.set_value(v)
+                return True
 
     def remove(self, k): pass
 
-    def keys(self): pass
+    def keys(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next().get_key())
+        return result
 
     def values(self): pass
 

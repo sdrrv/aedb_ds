@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup (
     name = "aed-ds",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "AED",
     author_email = "aed@autonoma.pt",
     description = "Data structures",

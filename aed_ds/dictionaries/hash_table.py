@@ -57,7 +57,17 @@ class HashTable(Dictionary):
                 node.set_value(v)
                 return True
 
-    def remove(self, k): pass
+    def remove(self, k):
+        if not self.has_key():
+            raise NoSuchElementException()
+        else:
+            idx = self.table[self.hash_function(k)]
+            list_pos = 0
+            while idx.iterator().has_next():
+                item = idx.iterator().next()
+                list_pos += 1
+                if item.get_key() == k:
+                    idx.remove(list_pos)
 
     def keys(self):
         result = SinglyLinkedList()
@@ -66,10 +76,20 @@ class HashTable(Dictionary):
                 result.insert_last(index.iterator().next().get_key())
         return result
 
-    def values(self): pass
+    def values(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next().get_value())
+        return result
 
-    def items(self): pass
-
+    def items(self):
+        result = SinglyLinkedList()
+        for index in self.table:
+            while index.iterator().has_next():
+                result.insert_last(index.iterator().next())
+        return result
+    
     def hash_function(self, k):
         return sum([ord(c) for c in k]) % self.array_size
 

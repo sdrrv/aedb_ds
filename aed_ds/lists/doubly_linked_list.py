@@ -54,9 +54,24 @@ class DoublyLinkedList(SinglyLinkedList):
         self.count += 1
 
     def insert(self, element, position):
-        pass
+        if position not in (self.size()):
+            raise InvalidPositionException()
+        else:
+            if position == 0:
+                self.insert_first(element)
+            elif position == self.size()-1:
+                self.insert_last(element)
+            else:
+                node = self.head
+                for _ in range(position-1):
+                    node = node.get_next()
+                new = DoubleListNode(element, node.get_next(), node)
+                node.set_next(new)
+                node.get_next().set_previous(new)
+            self.count += 1
 
     def remove_first(self):
+
         pass
 
     def remove_last(self):

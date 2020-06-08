@@ -11,13 +11,47 @@ class DoublyLinkedList(SinglyLinkedList):
         self.count = 0
 
     def get(self, position):
-        pass
+        if self.size() == 0:
+            raise EmptyListException()
+        elif position == 0:
+            return get_first()
+        elif position == self.size()-1:
+            return get_last()
+        else:
+            node = self.head
+            for _ in range(position):
+                node = node.get_next()
+            return node.get_element()
 
     def insert_first(self, element):
-        pass
+        node = DoubleListNode(element, None, None)
+        if self.size() == 0:
+            self.head = node
+            self.tail = node
+        elif self.size() == 1:
+            self.head = node
+            self.head.set_next(self.tail)
+            self.tail.set_previous(self.head)
+        else:
+            node.set_next(self.head)
+            self.head.set_previous(node)
+            self.head = node
+        self.count += 1
 
     def insert_last(self, element):
-        pass
+        node = DoubleListNode(element, None, None)
+        if self.size() == 0:
+            self.head = node
+            self.tail = node
+        elif self.size() == 1:
+            self.tail = node
+            self.head.set_next(self.tail)
+            self.tail.set_previous(self.head)
+        else:
+            node.set_previous(self.tail)
+            self.tail.set_next(node)
+            self.tail = node
+        self.count += 1
 
     def insert(self, element, position):
         pass

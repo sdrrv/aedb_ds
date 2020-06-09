@@ -14,9 +14,9 @@ class DoublyLinkedList(SinglyLinkedList):
         if self.size() == 0:
             raise EmptyListException()
         elif position == 0:
-            return get_first()
+            return self.get_first()
         elif position == self.size()-1:
-            return get_last()
+            return self.get_last()
         else:
             node = self.head
             for _ in range(position):
@@ -45,7 +45,7 @@ class DoublyLinkedList(SinglyLinkedList):
             self.tail = node
         elif self.size() == 1:
             self.tail = node
-            self.head.set_next(self.tail)
+            self.head.set_next(node)
             self.tail.set_previous(self.head)
         else:
             node.set_previous(self.tail)
@@ -54,12 +54,12 @@ class DoublyLinkedList(SinglyLinkedList):
         self.count += 1
 
     def insert(self, element, position):
-        if position not in (self.size()):
+        if 0 > position or position > self.size():
             raise InvalidPositionException()
         else:
             if position == 0:
                 self.insert_first(element)
-            elif position == self.size()-1:
+            elif position == self.size():
                 self.insert_last(element)
             else:
                 node = self.head
@@ -71,14 +71,60 @@ class DoublyLinkedList(SinglyLinkedList):
             self.count += 1
 
     def remove_first(self):
-
-        pass
+        if self.size() == 0:
+            raise EmptyListException()
+        else:
+            if self.size() == 1:
+                element = self.head.get_element()
+                self.head = None
+                self.tail = None
+            else:
+                element = self.head.get_element()
+                self.head = self.head.get_next()
+                self.head.set_previous(None)
+            self.count -= 1
+            return element
 
     def remove_last(self):
-        pass
+        if self.size() == 0:
+            raise EmptyListException()
+        else:
+            if self.size() == 1:
+                element = self.tail.get_element()
+                self.head = None
+                self.tail = None
+            else:
+                element = self.tail.get_element()
+                tail = self.tail
+                self.tail = self.tail.get_previous()
+            self.count -= 1
+            return element
 
     def remove(self, position):
-        pass
+        if position not in range(self.size()):
+            raise InvalidPositionException()
+        else:
+            if position == 0:
+                return self.remove_first()
+            elif position == self.size()-1:
+                return self.remove_last()
+            else:
+                node = self.head
+                for _ in range(position):
+                    node = node.get_next()
+                node.get_previous().set_next(node.get_next())
+                node.get_next().set_previous(node.get_previous())
+                self.count -= 1
+                return node.get_element()
+
+                # for _ in range(position):
+                #    node = node.get_next()
+                #removable = node.get_next()
+                # node.set_next(removable.get_next())
+                # removable.get_next().set_previous(node)
+                # removable.set_previous(None)
+                # removable.set_next(None)
+                # return removable.get_element()
 
     def iterator(self):
-        pass
+        return DoublyLinkedListIterator(self)

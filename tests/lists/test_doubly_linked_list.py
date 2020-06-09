@@ -5,6 +5,7 @@ from aed_ds.lists.doubly_linked_list import DoublyLinkedList
 from aed_ds.lists.doubly_linked_list_iterator import DoublyLinkedListIterator
 from aed_ds.tad_iterator import Iterator, TwoWayIterator
 
+
 class TestDoublyLinkedList(unittest.TestCase):
     def setUp(self):
         self.list = DoublyLinkedList()
@@ -12,6 +13,7 @@ class TestDoublyLinkedList(unittest.TestCase):
     def add_elements(self, quantity, shift=0):
         for i in range(quantity):
             self.list.insert_last(f"element {i+1+shift}")
+
     def remove_elements(self, quantity):
         for _ in range(quantity):
             self.list.remove_last()
@@ -92,7 +94,7 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.add_elements(5)
         self.list.remove_first()
         self.assertEqual(self.list.get_first(), "element 2")
-        
+
     def test_remove_first_single_element(self):
         self.list.make_empty()
         self.add_elements(1)
@@ -103,21 +105,21 @@ class TestDoublyLinkedList(unittest.TestCase):
 
         with self.assertRaises(EmptyListException):
             self.list.get(0)
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_last()
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_first()
-        
+
         self.assertTrue(self.list.is_empty())
-        
+
         self.assertEqual(self.list.find("element 1"), -1)
-        
+
         self.add_elements(1)
         self.assertEqual(self.list.get_first(), "element 1")
         self.assertEqual(self.list.get_last(), "element 1")
-        self.assertEqual(self.list.remove_first(), "element 1")    
+        self.assertEqual(self.list.remove_first(), "element 1")
 
     def test_remove_last(self):
         with self.assertRaises(EmptyListException):
@@ -136,21 +138,21 @@ class TestDoublyLinkedList(unittest.TestCase):
 
         with self.assertRaises(EmptyListException):
             self.list.get(0)
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_last()
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_first()
-        
+
         self.assertTrue(self.list.is_empty())
-        
+
         self.assertEqual(self.list.find("element 1"), -1)
-        
+
         self.add_elements(1)
         self.assertEqual(self.list.get_first(), "element 1")
         self.assertEqual(self.list.get_last(), "element 1")
-        self.assertEqual(self.list.remove_last(), "element 1")    
+        self.assertEqual(self.list.remove_last(), "element 1")
 
     def test_remove(self):
         with self.assertRaises(InvalidPositionException):
@@ -166,27 +168,27 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.list.make_empty()
         self.add_elements(1)
         self.assertEqual(self.list.remove(0), "element 1")
-        
+
         with self.assertRaises(InvalidPositionException):
             self.list.remove(0)
 
         with self.assertRaises(EmptyListException):
             self.list.get(0)
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_last()
-        
+
         with self.assertRaises(EmptyListException):
             self.list.get_first()
-        
+
         self.assertTrue(self.list.is_empty())
-        
+
         self.assertEqual(self.list.find("element 1"), -1)
-        
+
         self.add_elements(1)
         self.assertEqual(self.list.get_first(), "element 1")
         self.assertEqual(self.list.get_last(), "element 1")
-        self.assertEqual(self.list.remove(0), "element 1")    
+        self.assertEqual(self.list.remove(0), "element 1")
 
     def test_make_empty(self):
         self.assertTrue(self.list.is_empty())
@@ -196,6 +198,7 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.assertTrue(self.list.is_empty())
 
     def test_iterator(self):
-        self.assertIsInstance(self.list.iterator(), Iterator) # Already tested with TwoWayIterator
+        # Already tested with TwoWayIterator
+        self.assertIsInstance(self.list.iterator(), Iterator)
         self.assertIsInstance(self.list.iterator(), TwoWayIterator)
         self.assertIsInstance(self.list.iterator(), DoublyLinkedListIterator)

@@ -5,8 +5,6 @@ from aed_ds.exceptions import NoSuchElementException
 
 
 class TestSinglyLinkedListIterator(unittest.TestCase):
-    def setUp(self):
-        pass
 
     def test_has_next(self):
         singly_linked_list = SinglyLinkedList()

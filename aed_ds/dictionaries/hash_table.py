@@ -21,17 +21,17 @@ class HashTable(Dictionary):
         return self.num_elements
 
     def is_full(self):
-        return self.num_elements == self.array_size()
+        return self.num_elements == self.array_size
 
     def get(self, k):
-        if not has_key():
+        if not self.has_key(k):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]
-            while idx.iterator.has_next():
+            while idx.iterator().has_next():
                 item = idx.iterator().next()
-                if item.get_element().get_key() == k:
-                    return item.get_element().get_value()
+                if item.get_key() == k:
+                    return item.get_value()
 
     def insert(self, k, v):
         # Check if it has key
@@ -46,46 +46,50 @@ class HashTable(Dictionary):
         self.num_elements += 1  # Update the number of elements
 
     def update(self, k, v):
-        if not self.has_key():
+        if not self.has_key(k):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]
             while idx.iterator().has_next():
                 item = idx.iterator().next()
-                if item.get_element().get_key() == k:
-                    item.get_element().set_value(v)
+                if item.get_key() == k:
+                    item.set_value(v)
+                    break
 
     def remove(self, k):
-        if not self.has_key():
+        if not self.has_key(k):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]
-            list_pos = 0
             while idx.iterator().has_next():
                 item = idx.iterator().next()
-                list_pos += 1
                 if item.get_key() == k:
-                    idx.remove(list_pos)
+                    idx.remove(idx.find(item))
+                    self.num_elements -= 1
+                    return item.get_value()
 
     def keys(self):
         result = SinglyLinkedList()
         for index in self.table:
-            while index.iterator().has_next():
+            for _ in range(index.size()):
                 result.insert_last(index.iterator().next().get_key())
         return result
 
     def values(self):
         result = SinglyLinkedList()
         for index in self.table:
-            while index.iterator().has_next():
+            for _ in range(index.size()):
                 result.insert_last(index.iterator().next().get_value())
         return result
 
     def items(self):
         result = SinglyLinkedList()
         for index in self.table:
-            while index.iterator().has_next():
-                result.insert_last(index.iterator().next())
+            for _ in range(index.size()):
+                item = SinglyLinkedList()
+                item.insert_last(index.iterator().next().get_key())
+                item.insert_last(index.iterator().next().get_value())
+                result.insert_last(item)
         return result
 
     def hash_function(self, k):

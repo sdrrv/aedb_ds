@@ -117,14 +117,5 @@ class DoublyLinkedList(SinglyLinkedList):
                 self.count -= 1
                 return node.get_element()
 
-                # for _ in range(position):
-                #    node = node.get_next()
-                #removable = node.get_next()
-                # node.set_next(removable.get_next())
-                # removable.get_next().set_previous(node)
-                # removable.set_previous(None)
-                # removable.set_next(None)
-                # return removable.get_element()
-
     def iterator(self):
         return DoublyLinkedListIterator(self)

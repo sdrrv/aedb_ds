@@ -102,23 +102,22 @@ class SinglyLinkedList(List):
     # If the specified position is size(), insert corresponds to insertLast.
     # Throws InvalidPositionException.
     def insert(self, element, position):
-        if position not in range(0, self.count+1):
+        if 0 < position > self.count:
             raise InvalidPositionException()
         else:
             if position == 0:
                 self.insert_first(element)
-            elif position == self.count:
+            elif position == self.size():
                 self.insert_last(element)
             else:
-                current_node = self.head
-                for _ in range(0, position - 1):
-                    current_node = current_node.get_next()
-                new_node = SingleListNode(element, current_node.get_next())
-                current_node.set_next(new_node)
-                self.count += 1
-
+                node = self.head
+                for _ in range(position-1):
+                    node = node.get_next()
+                next_node = node.get_next()
+                new_node = SingleListNode(element, next_node)
+                node.set_next(new_node)
             self.count += 1
-    # Removes and returns the element at the first position in the list.
+   # Removes and returns the element at the first position in the list.
     # Throws EmptyListException.
 
     def remove_first(self):

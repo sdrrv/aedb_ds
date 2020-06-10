@@ -24,7 +24,7 @@ class HashTable(Dictionary):
         return self.num_elements == self.array_size()
 
     def get(self, k):
-        if not has_key():
+        if not self.has_key(k):
             raise NoSuchElementException()
         else:
             idx = self.table[self.hash_function(k)]

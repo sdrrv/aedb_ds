@@ -11,9 +11,3 @@ class TestArrayStack(TestStack, unittest.TestCase):
 
     def setUp(self):
         self.set_limit(10)
-<<<<<<< HEAD
-        
-if __name__ == "__main__":
-    unittest.main()
-=======
->>>>>>> 7841763ccee322ca4847cea594c761d35fee0866

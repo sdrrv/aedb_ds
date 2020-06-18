@@ -7,9 +7,10 @@ from .nodes.binary_nodes import BinarySearchTreeNode
 
 class BinarySearchTree(OrderedDictionary, Tree):
     def __init__(self,max_size):
-        self.max_size = max_size
+        self.max_size = max_size  #just because
         self.count = 0
         self.height_value = None
+        self.root = None
         
     # Returns the number of elements in the dictionary.
     def size(self):
@@ -23,7 +24,22 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
     # Returns the value associated with key k.
     # Throws NoSuchElementException
-    def get(self, k): pass
+    def get(self, k):
+        result = self.recursive_get(self.get_root,k)
+        if not result:
+            raise NoSuchElementException()
+        return result
+
+    def recursive_get(self,current_node,k):
+        if current_node:
+            current_key = current_node.get_key()
+            if current_key==k:
+                return current_node.get_element()
+            elif k < current_key:
+                self.recursive_get(current_node.get_left_child())
+            elif k > current_key:
+                self.recursive_get(current_node.get_right_child())
+
 
     # Inserts a new value, associated with key k.
     # Throws DuplicatedKeyException
@@ -59,7 +75,8 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
     # Returns the root of the tree
     # Throws EmptyTreeException
-    def get_root(self): pass
+    def get_root(self):
+        return self.root
 
     # Returns the height of the tree
     # Throws EmptyTreeException

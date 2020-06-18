@@ -6,11 +6,20 @@ from .nodes.binary_nodes import BinarySearchTreeNode
 
 
 class BinarySearchTree(OrderedDictionary, Tree):
+    def __init__(self,max_size):
+        self.max_size = max_size
+        self.count = 0
+        self.height_value = None
+        
     # Returns the number of elements in the dictionary.
-    def size(self): pass
+    def size(self):
+            return self.count
 
     # Returns true if the dictionary is full.
-    def is_full(self): pass
+    def is_full(self):
+        if self.count<self.max_size:
+            return False
+        return True
 
     # Returns the value associated with key k.
     # Throws NoSuchElementException
@@ -54,8 +63,17 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
     # Returns the height of the tree
     # Throws EmptyTreeException
-    def height(self): pass
+    def height(self):
+        if not self.height_value:
+            self.remake_height()
+        return self.height_value
+        
 
     # Returns True if the tree is empty
-    def is_empty(self): pass
+    def is_empty(self):
+        if self.count == 0:
+            return True
+        return False
     
+    #Remakes the height 
+    def remake_height(self):pass

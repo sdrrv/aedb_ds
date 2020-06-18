@@ -1,8 +1,7 @@
 import unittest
 
 from aed_ds.trees.binary_search_tree import BinarySearchTree
-from aed_ds.exceptions import NoSuchElementException, DuplicatedKeyException, \
-    EmptyTreeException
+from aed_ds.exceptions import NoSuchElementException, DuplicatedKeyException,EmptyTreeException
 from aed_ds.tad_iterator import Iterator
 
 

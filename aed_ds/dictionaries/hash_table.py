@@ -21,7 +21,7 @@ class HashTable(Dictionary):
         return self.num_elements
 
     def is_full(self):
-        return self.num_elements == self.array_size()
+        return self.num_elements == self.array_size
 
     def get(self, k):
         if not self.has_key(k):
@@ -92,13 +92,6 @@ class HashTable(Dictionary):
                 result.insert_last(item)
         return result
 
-    def items(self):
-        result = SinglyLinkedList()
-        for index in self.table:
-            while index.iterator().has_next():
-                result.insert_last(index.iterator().next())
-        return result
-    
     def hash_function(self, k):
         return sum([ord(c) for c in k]) % self.array_size
 

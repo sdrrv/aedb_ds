@@ -28,13 +28,13 @@ class BinarySearchTree(OrderedDictionary, Tree):
         result = self.recursive_get(self.get_root,k)
         if not result:
             raise NoSuchElementException()
-        return result
+        return result.get_element()
 
     def recursive_get(self,current_node,k):
         if current_node:
             current_key = current_node.get_key()
             if current_key==k:
-                return current_node.get_element()
+                return current_node
             elif k < current_key:
                 self.recursive_get(current_node.get_left_child())
             elif k > current_key:
@@ -51,7 +51,9 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
     # Removes the key k, and the value associated with it.
     # Throws NoSuchElementException
-    def remove(self, k): pass
+    def remove(self, k):
+        
+        pass
 
     # Returns a List with all the keys in the dictionary.
     def keys(self): pass

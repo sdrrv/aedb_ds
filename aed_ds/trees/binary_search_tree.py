@@ -36,10 +36,25 @@ class BinarySearchTree(OrderedDictionary, Tree):
             if current_key==k:
                 return current_node
             elif k < current_key:
-                self.recursive_get(current_node.get_left_child())
+                self.recursive_get(current_node.get_left_child(),k)
             elif k > current_key:
-                self.recursive_get(current_node.get_right_child())
+                self.recursive_get(current_node.get_right_child(),k)
 
+    def get_node_root(self,k):
+        return self.recursive_get_node_root(self.get_root(),k)
+    
+
+    def recursive_get_node_root(self,current_node,k,previus_node=None):
+        if current_node:
+            current_key = current_node.get_key()
+            if current_key==k:
+                return previus_node
+            previus_node = current_node
+            if k < current_key:
+                self.recursive_get_node_root(current_node.get_left_child(),k,previus_node)
+            elif k > current_key:
+                self.recursive_get_node_root(current_node.get_right_child(),k,previus_node)
+                
 
     # Inserts a new value, associated with key k.
     # Throws DuplicatedKeyException

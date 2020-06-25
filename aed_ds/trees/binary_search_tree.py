@@ -31,13 +31,14 @@ class BinarySearchTree(OrderedDictionary, Tree):
         else:
             result = self.recursive_get_node_root(self.get_root(),k)
             if not result:
+                print(result)
                 raise NoSuchElementException()
 
-            elif result.get_key()<k:
+            elif k < result.get_key():
                 result = result.get_left_child()
 
             else:
-                result = result.get_left_child()
+                result = result.get_right_child()
 
             return result.get_element()
 
@@ -50,17 +51,14 @@ class BinarySearchTree(OrderedDictionary, Tree):
     def recursive_get_node_root(self,current_node,k,previus_node=None):
         if current_node:
             current_key = current_node.get_key()
-            print(f"{current_key},{k}")
-            print(current_node.get_right_child().get_key())
             if current_key==k:
                 return previus_node
 
             if k < current_key:
-                self.recursive_get_node_root(current_node.get_left_child(),k,current_node)
+                return self.recursive_get_node_root(current_node.get_left_child(),k,current_node)
             elif k > current_key:
-                self.recursive_get_node_root(current_node.get_right_child(),k,current_node)
-        else:
-            raise DuplicatedKeyException()
+                return self.recursive_get_node_root(current_node.get_right_child(),k,current_node)
+
                 
 
     # Inserts a new value, associated with key k.

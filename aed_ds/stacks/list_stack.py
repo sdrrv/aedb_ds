@@ -9,6 +9,7 @@ class ListStack(Stack):
 
     def is_empty(self):
         return self.list.size() == 0
+<<<<<<< HEAD
 
     def is_full(self):
         return False
@@ -31,3 +32,26 @@ class ListStack(Stack):
         else:
             self.list.remove_last()
 
+=======
+
+    def is_full(self):
+        return False
+
+    def size(self):
+        return self.list.size()
+
+    def top(self):
+        return self.list.get_last()
+
+    def push(self, element):
+        if self.is_full():
+            raise FullStackException()
+        else:
+            self.list.insert_last(element)
+
+    def pop(self):
+        if self.is_empty():
+            raise EmptyStackException()
+        else:
+            self.list.remove_last()
+>>>>>>> 5bac28723bc0a9b0af35a408f9adfdcfbf3565c6

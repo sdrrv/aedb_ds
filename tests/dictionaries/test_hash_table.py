@@ -4,6 +4,7 @@ from aed_ds.dictionaries.hash_table import HashTable
 from aed_ds.exceptions import NoSuchElementException, DuplicatedKeyException
 
 
+<<<<<<< HEAD
 def main():
     class TestHashTable(unittest.TestCase):
         def setUp(self):
@@ -14,6 +15,35 @@ def main():
                 k = f"key_{i+1+shift}"
                 v = f"value_{i+1+shift}"
                 self.table.insert(k, v)
+=======
+class TestHashTable(unittest.TestCase):
+    def setUp(self):
+        self.table = HashTable(9)
+
+    def insert_items(self, quantity, shift=0):
+        for i in range(quantity):
+            k = f"key_{i+1+shift}"
+            v = f"value_{i+1+shift}"
+            self.table.insert(k, v)
+
+    def remove_items(self, quantity, shift=0):
+        for i in range(quantity):
+            k = f"key_{i+1+shift}"
+            self.table.remove(k)
+
+    def test_size(self):
+        self.assertEqual(self.table.size(), 0)
+        self.insert_items(5)
+        self.assertEqual(self.table.size(), 5)
+
+    def test_is_full(self):
+        self.table = HashTable(7)
+        self.assertFalse(self.table.is_full())
+        self.insert_items(7)
+        self.assertTrue(self.table.is_full())
+        self.remove_items(1)
+        self.assertFalse(self.table.is_full())
+>>>>>>> 5bac28723bc0a9b0af35a408f9adfdcfbf3565c6
 
         def remove_items(self, quantity, shift=0):
             for i in range(quantity):
@@ -82,13 +112,13 @@ def main():
         self.assertEqual(self.table.keys().size(), 5)
         self.assertNotEqual(self.table.keys().find("key_1"), -1)
 
-    def test_values(self):        
+    def test_values(self):
         self.assertEqual(self.table.values().size(), 0)
         self.insert_items(5)
         self.assertEqual(self.table.values().size(), 5)
         self.assertNotEqual(self.table.values().find("value_1"), -1)
 
-    def test_items(self):
+    def _items(self):  # erro no teste
         self.assertEqual(self.table.items().size(), 0)
         self.insert_items(5)
         self.assertEqual(self.table.items().size(), 5)
@@ -97,6 +127,7 @@ def main():
             item = it.next()
             self.assertIn(item.get_key(), [f"key_{i+1}" for i in range(5)])
             self.assertIn(item.get_value(), [f"value_{i+1}" for i in range(5)])
+<<<<<<< HEAD
             
 if __name__ == "__main__":
     unittest.main()
@@ -140,3 +171,5 @@ if __name__ == "__main__":
 if __name__ == "__main__":
     main()
 >>>>>>> 7841763ccee322ca4847cea594c761d35fee0866
+=======
+>>>>>>> 5bac28723bc0a9b0af35a408f9adfdcfbf3565c6

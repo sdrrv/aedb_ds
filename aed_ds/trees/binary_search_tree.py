@@ -3,12 +3,14 @@ from ..dictionaries.tad_ordered_dictionary import OrderedDictionary
 from ..exceptions import DuplicatedKeyException, NoSuchElementException, \
     EmptyDictionaryException
 from .nodes.binary_nodes import BinarySearchTreeNode
+from .binary_search_tree_iterator import Iterator
 
 
 class BinarySearchTree(OrderedDictionary, Tree):
     def __init__(self):
         self.root = BinarySearchTreeNode()
         self.count = 0
+        self.levels = None
 
     # Returns the number of elements in the dictionary.
     def size(self):
@@ -21,20 +23,18 @@ class BinarySearchTree(OrderedDictionary, Tree):
     # Returns the value associated with key k.
     # Throws NoSuchElementException
     def get(self, k):
-        result = self.recursive_get(self.get_root, k)
-        if not result:
-            raise NoSuchElementException()
-        return result
+        node = self.root
+        while True:
+            if node is None:
+                raise NoSuchElementException()
+            if node.get_key() == k:
+                return node.get_element()
 
-    def recursive_get(self, current_node, k):
-        if current_node:
-            current_key = current_node.get_key()
-            if current_key == k:
-                return current_node.get_element()
-            elif k < current_key:
-                self.recursive_get(current_node.get_left_child())
-            elif k > current_key:
-                self.recursive_get(current_node.get_right_child())
+            elif node.get_key() > k:
+                node = node.get_left_child()
+
+            else:
+                node = node.get_right_child()
 
     # Inserts a new value, associated with key k.
     # Throws DuplicatedKeyException
@@ -59,20 +59,22 @@ class BinarySearchTree(OrderedDictionary, Tree):
     def items(self): pass
 
     # Returns an iterator of the elements in the dictionary
-    def iterator(self): pass
+    def iterator(self):
+        return Iterator(self.root)
 
     # Returns the element with the smallest key
     # Throws EmptyTreeException
+
     def get_min_element(self):
         if self.is_empty():
-            raise EmptyDictionaryException
+            raise EmptyDictionaryException()
         return self.get_min_node(self.root).get_element()
 
     # Returns the element with the largest key
     # Throws EmptyTreeException
     def get_max_element(self):
         if self.is_empty():
-            raise EmptyDictionaryException
+            raise EmptyDictionaryException()
         return self.get_max_node(self.root).get_element()
 
     # Returns the root of the tree
@@ -82,7 +84,8 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
     # Returns the height of the tree
     # Throws EmptyTreeException
-    def height(self): pass
+    def height(self):
+        return self.levels
 
     # Returns True if the tree is empty
     def is_empty(self):
@@ -104,7 +107,7 @@ class BinarySearchTree(OrderedDictionary, Tree):
             self.count += 1
         else:
             if root.get_key() == k:
-                raise DuplicatedKeyException
+                raise DuplicatedKeyException()
             elif root.get_key() > k:
                 node = self.insert_element(root.get_left_child(), k, v)
                 root.set_left_child(node)
@@ -112,4 +115,3 @@ class BinarySearchTree(OrderedDictionary, Tree):
                 node = self.insert_element(root.get_right_child(), k, v)
                 root.set_right_child(node)
         return root
-

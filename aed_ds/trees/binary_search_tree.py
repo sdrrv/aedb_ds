@@ -42,6 +42,27 @@ class BinarySearchTree(OrderedDictionary, Tree):
 
             return result.get_element()
 
+    def get_node(self,k):
+        if not self.get_root():
+            raise NoSuchElementException()
+        
+        elif self.get_root().get_key() == k:
+            return self.get_root().get_element()
+
+        else:
+            result = self.recursive_get_node_root(self.get_root(),k)
+            if not result:
+                print(result)
+                raise NoSuchElementException()
+
+            elif k < result.get_key():
+                result = result.get_left_child()
+
+            else:
+                result = result.get_right_child()
+
+            return result
+
 
     def get_node_root(self,k):
         if self.get_root().get_element()==k:
@@ -88,8 +109,9 @@ class BinarySearchTree(OrderedDictionary, Tree):
     # Removes the key k, and the value associated with it.
     # Throws NoSuchElementException
     def remove(self, k):
-        node_to_remove = self.get(k)
+        node_to_remove = self.get_node(k)
         previous_node = self.get_node_root(k)
+
         if node_to_remove.is_leaf():
             if not previous_node:
                 self.root=None
@@ -105,8 +127,9 @@ class BinarySearchTree(OrderedDictionary, Tree):
             elif previous_node.get_key()<k:
                   previous_node.set_right_child(None)
             else:
-                previous_node.set_left_child(None)
+                previous_node.set_left_child(node_to_remove.get_left_child())
             
+
         else:
             left_element=self.remove_element(node_to_remove,node_to_remove)
 

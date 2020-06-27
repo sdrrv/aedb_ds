@@ -51,16 +51,10 @@ class TestHashTable(unittest.TestCase):
         self.assertTrue(self.table.has_key("key_1"))
         with self.assertRaises(DuplicatedKeyException):
             self.table.insert("key_1", "value_1")
-            self.assertTrue(self.table.has_key("key_1"))
-            with self.assertRaises(DuplicatedKeyException):
-                self.table.insert("key_1", "value_1")
-            self.assertEqual(self.table.get("key_1"), "value_1")
+        self.assertEqual(self.table.get("key_1"), "value_1")
 
-        def test_update(self):
-            with self.assertRaises(NoSuchElementException):
-                self.table.update("key_1", "new_value_1")
-            self.insert_items(1)
-            self.assertEqual(self.table.get("key_1"), "value_1")
+    def test_update(self):
+        with self.assertRaises(NoSuchElementException):
             self.table.update("key_1", "new_value_1")
         self.insert_items(1)
         self.assertEqual(self.table.get("key_1"), "value_1")
